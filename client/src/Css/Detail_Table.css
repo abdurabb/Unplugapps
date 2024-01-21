@@ -1,0 +1,19 @@
+.tableMainTop{
+    width: 100vw;
+}
+
+.headerTable{
+    /* background-color: red; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    margin-top: 15px;
+    margin-left: 15px;
+    
+}
+
+.custom-table-style  {
+    background-color: red !important;
+  }
