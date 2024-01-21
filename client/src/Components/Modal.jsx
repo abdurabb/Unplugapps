@@ -18,6 +18,7 @@ const Modal = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        alert('hai')
         // You can handle the form submission here
         console.log('Form Data:', formData);
         // Reset the form if needed
@@ -34,48 +35,53 @@ const Modal = (props) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
-            <div className=" p-8">
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Name:
+            <div className="p-8 bg-white rounded shadow-md w-96 space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="text-2xl font-bold text-center">Contact Form</div>
+
+                    <div className="mb-4">
+                        <label className="block text-sm font-semibold text-gray-600">Name:</label>
                         <input
                             type="text"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
+                            className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500"
                         />
-                    </label>
-                    <br />
+                    </div>
 
-                    <label>
-                        Email:
+                    <div className="mb-4">
+                        <label className="block text-sm font-semibold text-gray-600">Email:</label>
                         <input
                             type="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
+                            className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500"
                         />
-                    </label>
-                    <br />
+                    </div>
 
-                    <label>
-                        Age:
+                    <div className="mb-4">
+                        <label className="block text-sm font-semibold text-gray-600">Age:</label>
                         <input
                             type="number"
                             name="age"
                             value={formData.age}
                             onChange={handleChange}
+                            className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500"
                         />
-                    </label>
-                    <br />
+                    </div>
 
-                    <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                        Submit
-                    </button>
+                    <div className="flex items-center justify-between">
+                      
+                        <Button name={'Submit'} type='submit'/>
+                        <Button name={'Close'} method={close} className="text-gray-600 hover:text-gray-800 focus:outline-none" />
+                    </div>
                 </form>
-                <Button name={'Close'} method={close} />
             </div>
         </div>
+
+
     );
 };
 

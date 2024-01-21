@@ -3,7 +3,7 @@ import React from 'react'
 function Button(props) {
     return (
         <div>
-            <button onClick={props.method} className='sideButtons bg-yellow-200 rounded' >{props.name}</button>
+            <button type={props.type} onClick={props.method} className='sideButtons mt-8 w-full p-2 bg-yellow-200 rounded' >{props.name}</button>
         </div>
     )
 }
