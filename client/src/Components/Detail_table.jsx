@@ -1,64 +1,89 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import '../Css/Detail_Table.css'
+import LoadingSpinner from './LoadingSpinner';
+
+
+
+
+
 function Detail_table() {
+
+  const [isLoad, setIsLoad] = useState(false)
+  const [data, setData] = useState([])
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    axios.get('http://5.189.180.8:8010/detail').then((res) => {
+      setData(res.data)
+      setIsLoad(false)
+    }).catch((err) => {
+      setErrorMessage('Somthing Wrong in Detail Table')
+      setIsLoad(false)
+    })
+  }, [])
+
   return (
-    <div>
-      <div className='headerTable '>
-        {/* table  table-bordered */}
-        <table className=" table  table-bordered   tableMainTop">
-          <thead className=''>
-            <tr className='text-center MainHead'>
-              <th colSpan="6" className=''>Detail</th>
-            </tr>
-          </thead>
-          <tbody className=''>
-          <tr className='firstHead'>
-              <th scope="row">Sr No</th>
-              <td>Item Code</td>
-              <td>Item Name</td>
-              <td>Qty</td>
-              <td>Rate</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>@twitter</td>
-              <td>@twitter</td>
+    <>
+      {errorMessage ?
+        <div> {errorMessage}</div>
+        :
 
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>@twitter</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>@twitter</td>
-              <td>@twitter</td>
-            </tr>
+        <div>
 
-            <tr>
-              <th colSpan="4"></th>
-              
-              <td>Total</td>
-              <td>7000</td>
-            </tr>
-            
-            
-          </tbody>
-        </table>
-      </div>
-    </div>
+          {isLoad ?
+            <div>
+
+              <div className='d-flex justify-center items-center h-screen'>
+                <LoadingSpinner />
+              </div>
+
+            </div>
+            :
+
+            <div className='headerTable '>
+              {/* table  table-bordered */}
+              <table className=" table  table-bordered   tableMainTop">
+                <thead className=''>
+                  <tr className='text-center MainHead'>
+                    <th colSpan="6" className=''>Detail</th>
+                  </tr>
+                </thead>
+                <tbody className=''>
+                  <tr className='firstHead'>
+                    <th scope="row">Sr No</th>
+                    <td>Item Code</td>
+                    <td>Item Name</td>
+                    <td>Qty</td>
+                    <td>Rate</td>
+                    <td>Amount</td>
+                  </tr>
+                  {data.map((data, index) => {
+                    return (
+                      <>
+                        <tr>
+                          <th scope="row">{index + 1}</th>
+                          <td>{data.item_code}</td>
+                          <td>{data.item_name}</td>
+                          <td>{data.qty}</td>
+                          <td>{data.rate}</td>
+                          <td>{data.qty * data.rate}</td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                        </tr>
+                      </>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      }
+    </>
   )
+
 }
 
 export default Detail_table
