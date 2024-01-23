@@ -12,6 +12,7 @@ function Detail_table() {
   const [isLoad, setIsLoad] = useState(false)
   const [data, setData] = useState([])
   const [errorMessage, setErrorMessage] = useState("");
+  let total = 0;
 
   useEffect(() => {
     axios.get('http://5.189.180.8:8010/detail').then((res) => {
@@ -59,6 +60,8 @@ function Detail_table() {
                     <td>Amount</td>
                   </tr>
                   {data.map((data, index) => {
+                   total+=data.qty * data.rate
+                   
                     return (
                       <>
                         <tr>
@@ -68,13 +71,20 @@ function Detail_table() {
                           <td>{data.qty}</td>
                           <td>{data.rate}</td>
                           <td>{data.qty * data.rate}</td>
-                        </tr>
-                        <tr>
-                          <td></td>
+                          
                         </tr>
                       </>
                     )
                   })}
+                  <tr>
+                    <td colSpan="4"></td>
+                    {/* <td ></td>
+                    <td ></td> */}
+                    <td>Total</td>
+                    <td>{total}</td>
+                  </tr>
+
+
                 </tbody>
               </table>
             </div>
