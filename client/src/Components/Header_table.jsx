@@ -20,7 +20,7 @@ function Header_table() {
             setData(res.data)
             setIsLoad(false)
         }).catch((err) => {
-            setErrorMessage('Somthing Wrong in Header Table')
+            // setErrorMessage('Somthing Wrong in Header Table')
             // setIsLoad(false)
 
         })
